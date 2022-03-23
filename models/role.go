@@ -6,8 +6,12 @@ import (
 )
 
 type Role struct {
-	gorm.Model
 	ID     uuid.UUID `gorm:"PrimaryKey"`
 	Title  string    `gorm:"type:ENUM('admin','maker','checker','signer','viewer')"`
 	Active bool
+}
+
+func (role *Role) BeforeCreate(tx *gorm.DB) (err error) {
+	role.ID = uuid.New()
+	return
 }
