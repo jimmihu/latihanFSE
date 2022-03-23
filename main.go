@@ -1,5 +1,7 @@
 package main
 
-func main() {
+import "latihanFSE/config"
 
+func main() {
+	config.InitConfig()
 }
