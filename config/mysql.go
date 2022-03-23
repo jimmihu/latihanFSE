@@ -1,8 +1,9 @@
 package config
 
 import (
-	"latihanFSE/models"
 	"log"
+
+	"latihanFSE/models/entity"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
@@ -21,8 +22,8 @@ func ConnectMySQL() (*gorm.DB, error) {
 	mysqlConn.DB().SetMaxIdleConns(2)
 	mysqlConn.DB().SetMaxOpenConns(9999)
 	mysqlConn.LogMode(true)
-	mysqlConn.AutoMigrate(&models.User{})
-	mysqlConn.AutoMigrate(&models.Role{})
+	mysqlConn.AutoMigrate(&entity.User{})
+	mysqlConn.AutoMigrate(&entity.Role{})
 
 	log.Println("MySQL connection success")
 	return mysqlConn, nil
