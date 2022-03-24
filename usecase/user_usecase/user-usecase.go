@@ -29,3 +29,19 @@ func (u *UserUsecase) CreateUser(request dto.CreateUserRequest) dto.HttpResponse
 		Data:       entity.ResultUserId{ID: user.ID},
 	}
 }
+
+func (u *UserUsecase) GetUserList() dto.HttpResponse {
+
+	UserList, result := u.UserRepo.GetUserList()
+
+	if result.Error != nil {
+		return dto.DBErrorResponse(result.Error)
+	}
+
+	return dto.HttpResponse{
+		StatusCode: http.StatusCreated,
+		Status:     "ok",
+		Error:      nil,
+		Data:       UserList,
+	}
+}

@@ -15,7 +15,6 @@ type HttpResponse struct {
 }
 
 func DBErrorResponse(err error) HttpResponse {
-
 	log.Print(err)
 	errMsg := "Database Error"
 	return HttpResponse{
@@ -27,8 +26,8 @@ func DBErrorResponse(err error) HttpResponse {
 }
 
 func JsonRequestErrorResponse(c *gin.Context, err error) {
-	errMsg := "Invalid Json Request"
 	log.Print(err)
+	errMsg := "Invalid Json Request"
 	c.JSON(http.StatusBadRequest, HttpResponse{
 		StatusCode: http.StatusBadRequest,
 		Status:     "failed",

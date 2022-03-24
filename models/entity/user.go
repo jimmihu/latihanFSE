@@ -2,21 +2,29 @@ package entity
 
 import (
 	"github.com/google/uuid"
-	"github.com/jinzhu/gorm"
+	"gorm.io/gorm"
 )
 
 type User struct {
-	ID             uuid.UUID `gorm:"primaryKey;column:id;type:varchar(55)"`
-	PersonalNumber string    `gorm:"column:personal_number;type:varchar(65)"`
-	Password       string    `gorm:"column:password;type:varchar(65)"`
-	Email          string    `gorm:"column:emai;type:varchar(255)"`
-	Name           string    `gorm:"column:name;type:varchar(255)"`
-	RoleID         uuid.UUID `gorm:"column:role_id;type:varchar(55)"`
-	Role           Role      `gorm:"ForeignKey:RoleID"`
-	Active         bool      `gorm:"column:active;type:bool"`
+	ID             uuid.UUID `gorm:"primaryKey;column:id;type:varchar(55)" json:"user_id"`
+	PersonalNumber string    `gorm:"column:personal_number;type:varchar(65)" json:"personal_number"`
+	Password       string    `gorm:"column:password;type:varchar(65)" json:"password"`
+	Email          string    `gorm:"column:emai;type:varchar(255)" json:"email"`
+	Name           string    `gorm:"column:name;type:varchar(255)" json:"name"`
+	RoleID         uuid.UUID `gorm:"column:role_id;type:varchar(55)" json:"-"`
+	Role           Role      `gorm:"foreignKey:RoleID" json:"role"`
+	Active         bool      `gorm:"column:active;type:bool" json:"active"`
 }
 
 func (user *User) BeforeCreate(tx *gorm.DB) (err error) {
 	user.ID = uuid.New()
 	return
+}
+
+type UserList struct {
+	ID     uuid.UUID `json:"id"`
+	Name   string    `json:"name"`
+	RoleID uuid.UUID `json:"-"`
+	Role   Role      `json:"role" gorm:"foreignKey:RoleID"`
+	Active bool      `json:"active"`
 }

@@ -14,11 +14,11 @@ import (
 func main() {
 	config.InitConfig()
 
-	mysqlConn, errMysql := config.ConnectMySQL()
+	mysqlConn, sqlDB, errMysql := config.ConnectMySQL()
 	if errMysql != nil {
 		log.Println("error mysql connection: ", errMysql)
 	}
-	defer mysqlConn.Close()
+	defer sqlDB.Close()
 
 	if errMysql == nil {
 		router := app.InitRouter(mysqlConn)

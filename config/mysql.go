@@ -1,27 +1,32 @@
 package config
 
 import (
+	"database/sql"
 	"log"
 
 	"latihanFSE/models/entity"
 
-	_ "github.com/go-sql-driver/mysql"
-	"github.com/jinzhu/gorm"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 )
 
-func ConnectMySQL() (*gorm.DB, error) {
+func ConnectMySQL() (*gorm.DB, *sql.DB, error) {
 
 	connectionString := CONFIG["MYSQL_USER"] + ":" + CONFIG["MYSQL_PASS"] + "@tcp(" + CONFIG["MYSQL_HOST"] + ":" + CONFIG["MYSQL_PORT"] + ")/" + CONFIG["MYSQL_SCHEMA"] + "?parseTime=true"
-	mysqlConn, err := gorm.Open("mysql", connectionString)
+	mysqlConn, err := gorm.Open(mysql.Open(connectionString), &gorm.Config{})
 
 	if err != nil {
 		log.Println("Error connect to MySQL: ", err.Error())
-		return nil, err
+		return nil, nil, err
 	}
 
-	mysqlConn.DB().SetMaxIdleConns(2)
-	mysqlConn.DB().SetMaxOpenConns(9999)
-	mysqlConn.LogMode(true)
+	sqlDB, errDB := mysqlConn.DB()
+	if errDB != nil {
+		log.Println(errDB)
+	} else {
+		sqlDB.SetMaxIdleConns(2)
+		sqlDB.SetMaxOpenConns(1000)
+	}
 	mysqlConn.AutoMigrate(&entity.User{})
 	mysqlConn.AutoMigrate(&entity.Role{})
 
@@ -35,7 +40,7 @@ func ConnectMySQL() (*gorm.DB, error) {
 	}
 
 	log.Println("MySQL connection success")
-	return mysqlConn, nil
+	return mysqlConn, sqlDB, nil
 
 	// return nil, nil
 }

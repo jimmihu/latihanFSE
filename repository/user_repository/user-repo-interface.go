@@ -3,11 +3,12 @@ package user_repository
 import (
 	"latihanFSE/models/entity"
 
-	"github.com/jinzhu/gorm"
+	"gorm.io/gorm"
 )
 
 type UserRepoInterface interface {
 	CreateUser(user *entity.User) *gorm.DB
+	GetUserList() ([]entity.UserList, *gorm.DB)
 }
 
 type UserRepo struct {

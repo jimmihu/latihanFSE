@@ -21,3 +21,8 @@ func (u *UserDelivery) CreateUser(c *gin.Context) {
 	response := u.UserUsecase.CreateUser(CreateUserRequest)
 	c.JSON(response.StatusCode, response)
 }
+
+func (u *UserDelivery) GetUserList(c *gin.Context) {
+	response := u.UserUsecase.GetUserList()
+	c.JSON(response.StatusCode, response)
+}

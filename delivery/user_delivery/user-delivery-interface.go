@@ -8,6 +8,7 @@ import (
 
 type UserDeliveryInterface interface {
 	CreateUser(*gin.Context)
+	GetUserList(*gin.Context)
 }
 
 type UserDelivery struct {
