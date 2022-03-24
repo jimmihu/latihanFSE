@@ -2,18 +2,18 @@ package entity
 
 import (
 	"github.com/google/uuid"
-	"gorm.io/gorm"
+	"github.com/jinzhu/gorm"
 )
 
 type User struct {
-	ID             uuid.UUID `gorm:"PrimaryKey"`
-	PersonalNumber string
-	Password       string
-	Email          string
-	Name           string
-	RoleID         uuid.UUID
-	Role           Role `gorm:"ForeignKey:RoleId"`
-	Active         bool
+	ID             uuid.UUID `gorm:"primaryKey;column:id;type:varchar(55)"`
+	PersonalNumber string    `gorm:"column:personal_number;type:varchar(65)"`
+	Password       string    `gorm:"column:password;type:varchar(65)"`
+	Email          string    `gorm:"column:emai;type:varchar(255)"`
+	Name           string    `gorm:"column:name;type:varchar(255)"`
+	RoleID         uuid.UUID `gorm:"column:role_id;type:varchar(55)"`
+	Role           Role      `gorm:"ForeignKey:RoleID"`
+	Active         bool      `gorm:"column:active;type:bool"`
 }
 
 func (user *User) BeforeCreate(tx *gorm.DB) (err error) {

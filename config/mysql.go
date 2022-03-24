@@ -25,6 +25,15 @@ func ConnectMySQL() (*gorm.DB, error) {
 	mysqlConn.AutoMigrate(&entity.User{})
 	mysqlConn.AutoMigrate(&entity.Role{})
 
+	//seed roles
+	role := entity.Role{}
+	var roles = [5]string{"admin", "maker", "checker", "signer", "viewer"}
+	if err := mysqlConn.Where("title = ?", "admin").First(&role).Error; err != nil {
+		for i := 0; i < len(roles); i++ {
+			mysqlConn.Create(&entity.Role{Title: roles[i], Active: true})
+		}
+	}
+
 	log.Println("MySQL connection success")
 	return mysqlConn, nil
 

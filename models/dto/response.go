@@ -3,6 +3,8 @@ package dto
 import (
 	"log"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 type HttpResponse struct {
@@ -12,7 +14,7 @@ type HttpResponse struct {
 	Data       interface{} `json:"data"`
 }
 
-func ErrorDBResponse(err error) HttpResponse {
+func DBErrorResponse(err error) HttpResponse {
 
 	log.Print(err)
 	errMsg := "Database Error"
@@ -22,4 +24,15 @@ func ErrorDBResponse(err error) HttpResponse {
 		Error:      &errMsg,
 		Data:       nil,
 	}
+}
+
+func JsonRequestErrorResponse(c *gin.Context, err error) {
+	errMsg := "Invalid Json Request"
+	log.Print(err)
+	c.JSON(http.StatusBadRequest, HttpResponse{
+		StatusCode: http.StatusBadRequest,
+		Status:     "failed",
+		Error:      &errMsg,
+		Data:       nil,
+	})
 }

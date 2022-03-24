@@ -7,7 +7,7 @@ import (
 	"latihanFSE/models/entity"
 )
 
-func (u *UserUseCase) CreateUser(request dto.CreateUserRequest) dto.HttpResponse {
+func (u *UserUsecase) CreateUser(request dto.CreateUserRequest) dto.HttpResponse {
 
 	user := entity.User{
 		PersonalNumber: request.PersonalNumber,
@@ -19,7 +19,7 @@ func (u *UserUseCase) CreateUser(request dto.CreateUserRequest) dto.HttpResponse
 	result := u.UserRepo.CreateUser(&user)
 
 	if result.Error != nil {
-		return dto.ErrorDBResponse(result.Error)
+		return dto.DBErrorResponse(result.Error)
 	}
 
 	return dto.HttpResponse{
