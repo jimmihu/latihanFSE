@@ -23,3 +23,8 @@ type UpdateUserRequest struct {
 type RoleID struct {
 	ID uuid.UUID `json:"id"`
 }
+
+type CreateProductRequest struct {
+	Name        string `json:"name"`
+	Description string `json:"description" `
+}

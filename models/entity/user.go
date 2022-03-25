@@ -43,3 +43,7 @@ type UserDetail struct {
 	Role           Role      `json:"role" gorm:"foreignKey:RoleID"`
 	Active         bool      `json:"active"`
 }
+
+type ResultUserId struct {
+	ID uuid.UUID `json:"id"`
+}

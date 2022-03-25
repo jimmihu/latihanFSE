@@ -36,6 +36,28 @@ func UserNotFoundResponse(err error) HttpResponse {
 	}
 }
 
+func UnauthorizedResponse(err error) HttpResponse {
+	log.Print(err)
+	errMsg := "Unauthorized!"
+	return HttpResponse{
+		StatusCode: http.StatusUnauthorized,
+		Status:     "failed",
+		Error:      &errMsg,
+		Data:       nil,
+	}
+}
+
+func ForbiddenResponse(err error) HttpResponse {
+	log.Print(err)
+	errMsg := "Forbidden!"
+	return HttpResponse{
+		StatusCode: http.StatusForbidden,
+		Status:     "failed",
+		Error:      &errMsg,
+		Data:       nil,
+	}
+}
+
 func JsonRequestErrorResponse(c *gin.Context, err error) {
 	log.Print(err)
 	errMsg := "Bad Json Request!"

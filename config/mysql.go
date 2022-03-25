@@ -29,6 +29,7 @@ func ConnectMySQL() (*gorm.DB, *sql.DB, error) {
 	}
 	mysqlConn.AutoMigrate(&entity.User{})
 	mysqlConn.AutoMigrate(&entity.Role{})
+	mysqlConn.AutoMigrate(&entity.Product{})
 
 	//seed roles
 	role := entity.Role{}

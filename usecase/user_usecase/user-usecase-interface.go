@@ -18,7 +18,7 @@ type UserUsecase struct {
 	UserRepo user_repository.UserRepoInterface
 }
 
-func CreateUsercase(UserRepo user_repository.UserRepoInterface) UserUsecaseInterface {
+func CreateUserUsecase(UserRepo user_repository.UserRepoInterface) UserUsecaseInterface {
 	return &UserUsecase{
 		UserRepo: UserRepo,
 	}

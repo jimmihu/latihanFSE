@@ -19,7 +19,7 @@ type UserDelivery struct {
 	UserUsecase user_usecase.UserUsecaseInterface
 }
 
-func CreateDelivery(UserUsecase user_usecase.UserUsecaseInterface) UserDeliveryInterface {
+func CreateUserDelivery(UserUsecase user_usecase.UserUsecaseInterface) UserDeliveryInterface {
 	return &UserDelivery{
 		UserUsecase: UserUsecase,
 	}
