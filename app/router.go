@@ -35,6 +35,9 @@ func InitRouter(mysqlConn *gorm.DB) *gin.Engine {
 	router.GET("/roles", UserDelivery.GetRoleList)
 
 	router.POST("/products", ProductDelivery.CreateProduct)
+	router.GET("/products", ProductDelivery.GetProductList)
+	router.GET("/products/:id", ProductDelivery.GetProductDetail)
+	router.DELETE("/products/:id", ProductDelivery.DeleteProduct)
 
 	return router
 }

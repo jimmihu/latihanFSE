@@ -36,6 +36,17 @@ func UserNotFoundResponse(err error) HttpResponse {
 	}
 }
 
+func ProductNotFoundResponse(err error) HttpResponse {
+	log.Print(err)
+	errMsg := "Product Not Found!"
+	return HttpResponse{
+		StatusCode: http.StatusNotFound,
+		Status:     "failed",
+		Error:      &errMsg,
+		Data:       nil,
+	}
+}
+
 func UnauthorizedResponse(err error) HttpResponse {
 	log.Print(err)
 	errMsg := "Unauthorized!"

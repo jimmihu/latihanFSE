@@ -27,3 +27,28 @@ func (product *Product) BeforeCreate(tx *gorm.DB) (err error) {
 	product.ID = uuid.New()
 	return
 }
+
+type ProductList struct {
+	ID          uuid.UUID `json:"id"`
+	Name        string    `json:"name"`
+	Description string    `json:"description"`
+	Status      string    `json:"status"`
+}
+
+type ProductDetail struct {
+	ID          uuid.UUID  `json:"id"`
+	Name        string     `json:"name"`
+	Description string     `json:"description"`
+	Status      string     `json:"status"`
+	MakerID     uuid.UUID  `json:"-"`
+	Maker       UserResult `gorm:"foreignKey:MakerID"`
+	CheckerID   uuid.UUID  `json:"-"`
+	Checker     UserResult `gorm:"foreignKey:CheckerID"`
+	SignerID    uuid.UUID  `json:"-"`
+	Signer      UserResult `gorm:"foreignKey:SignerID"`
+}
+
+type UserResult struct {
+	ID   uuid.UUID `json:"id"`
+	Name string    `json:"name"`
+}

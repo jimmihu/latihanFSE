@@ -8,6 +8,9 @@ import (
 
 type ProductDeliveryInterface interface {
 	CreateProduct(c *gin.Context)
+	GetProductList(c *gin.Context)
+	GetProductDetail(c *gin.Context)
+	DeleteProduct(c *gin.Context)
 }
 
 type ProductDelivery struct {
