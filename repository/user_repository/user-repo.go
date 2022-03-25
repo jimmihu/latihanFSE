@@ -46,3 +46,13 @@ func (repo *UserRepo) DeleteUser(ID uuid.UUID) *gorm.DB {
 	Result := repo.mysqlConn.Delete(&entity.User{}, ID)
 	return Result
 }
+
+func (repo *UserRepo) UpdateUser(ID uuid.UUID, user *entity.User) *gorm.DB {
+	if user.Password == "" {
+
+	} else {
+		user.Password, _ = utils.HashPassword(user.Password)
+	}
+	Result := repo.mysqlConn.Model(entity.User{ID: ID}).Updates(&user)
+	return Result
+}

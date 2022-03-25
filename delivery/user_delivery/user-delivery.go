@@ -43,3 +43,19 @@ func (u *UserDelivery) DeleteUser(c *gin.Context) {
 	response := u.UserUsecase.DeleteUser(ID)
 	c.JSON(response.StatusCode, response)
 }
+
+func (u *UserDelivery) UpdateUser(c *gin.Context) {
+	ID := c.Param("id")
+	d := json.NewDecoder(c.Request.Body)
+	d.DisallowUnknownFields()
+
+	UpdateUserRequest := dto.UpdateUserRequest{}
+	err := d.Decode(&UpdateUserRequest)
+	if err != nil {
+		dto.JsonRequestErrorResponse(c, err)
+		return
+	}
+
+	response := u.UserUsecase.UpdateUser(ID, UpdateUserRequest)
+	c.JSON(response.StatusCode, response)
+}

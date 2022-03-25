@@ -89,10 +89,42 @@ func (u *UserUsecase) DeleteUser(ID string) dto.HttpResponse {
 		return dto.UserNotFoundResponse(result.Error)
 	}
 
+	if result.Error != nil {
+		return dto.DBErrorResponse(result.Error)
+	}
+
 	return dto.HttpResponse{
 		StatusCode: http.StatusOK,
 		Status:     "ok",
 		Error:      nil,
 		Data:       nil,
+	}
+}
+
+func (u *UserUsecase) UpdateUser(ID string, request dto.UpdateUserRequest) dto.HttpResponse {
+	uuID, _ := uuid.Parse(ID)
+	user := entity.User{
+		PersonalNumber: request.PersonalNumber,
+		Name:           request.Name,
+		Email:          request.Email,
+		Password:       request.Password,
+		Active:         request.Active,
+		RoleID:         request.Role.ID,
+	}
+	result := u.UserRepo.UpdateUser(uuID, &user)
+
+	if result.RowsAffected == 0 {
+		return dto.UserNotFoundResponse(result.Error)
+	}
+
+	if result.Error != nil {
+		return dto.DBErrorResponse(result.Error)
+	}
+
+	return dto.HttpResponse{
+		StatusCode: http.StatusOK,
+		Status:     "ok",
+		Error:      nil,
+		Data:       entity.ResultUserId{ID: uuID},
 	}
 }

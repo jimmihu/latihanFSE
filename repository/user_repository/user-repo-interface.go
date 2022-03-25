@@ -13,6 +13,7 @@ type UserRepoInterface interface {
 	GetRoleList() ([]entity.Role, *gorm.DB)
 	GetUserDetail(ID uuid.UUID) (entity.UserDetail, *gorm.DB)
 	DeleteUser(ID uuid.UUID) *gorm.DB
+	UpdateUser(ID uuid.UUID, user *entity.User) *gorm.DB
 }
 
 type UserRepo struct {

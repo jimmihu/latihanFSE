@@ -11,6 +11,7 @@ type UserUsecaseInterface interface {
 	GetRoleList() dto.HttpResponse
 	GetUserDetail(string) dto.HttpResponse
 	DeleteUser(string) dto.HttpResponse
+	UpdateUser(string, dto.UpdateUserRequest) dto.HttpResponse
 }
 
 type UserUsecase struct {
