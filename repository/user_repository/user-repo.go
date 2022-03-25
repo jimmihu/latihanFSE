@@ -4,6 +4,7 @@ import (
 	"latihanFSE/models/entity"
 	"latihanFSE/utils"
 
+	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
@@ -27,4 +28,10 @@ func (repo *UserRepo) GetUserList() ([]entity.UserList, *gorm.DB) {
 	UserListResult := []entity.UserList{}
 	Result := repo.mysqlConn.Model(&entity.User{}).Joins("Role").Find(&UserListResult)
 	return UserListResult, Result
+}
+
+func (repo *UserRepo) GetUserDetail(Id uuid.UUID) (entity.User, *gorm.DB) {
+	UserDetailResult := entity.User{}
+	Result := repo.mysqlConn.Model(&entity.User{}).Joins("Role").First(&UserDetailResult, Id)
+	return UserDetailResult, Result
 }

@@ -26,3 +26,9 @@ func (u *UserDelivery) GetUserList(c *gin.Context) {
 	response := u.UserUsecase.GetUserList()
 	c.JSON(response.StatusCode, response)
 }
+
+func (u *UserDelivery) GetUserDetail(c *gin.Context) {
+	ID := c.Param("id")
+	response := u.UserUsecase.GetUserDetail(ID)
+	c.JSON(response.StatusCode, response)
+}

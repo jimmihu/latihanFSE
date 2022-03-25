@@ -25,6 +25,17 @@ func DBErrorResponse(err error) HttpResponse {
 	}
 }
 
+func UserNotFoundResponse(err error) HttpResponse {
+	log.Print(err)
+	errMsg := "User Not Found"
+	return HttpResponse{
+		StatusCode: http.StatusNotFound,
+		Status:     "failed",
+		Error:      &errMsg,
+		Data:       nil,
+	}
+}
+
 func JsonRequestErrorResponse(c *gin.Context, err error) {
 	log.Print(err)
 	errMsg := "Invalid Json Request"

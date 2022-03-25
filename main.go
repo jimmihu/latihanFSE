@@ -29,8 +29,8 @@ func main() {
 			Addr:    ":" + port,
 			Handler: router,
 		}
-
-		log.Println("Server Initialized")
+		env := config.ENVIRONMENT
+		log.Println("Server Initialized at " + env + ":" + port)
 
 		go func() {
 			if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
