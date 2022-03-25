@@ -16,7 +16,7 @@ type HttpResponse struct {
 
 func DBErrorResponse(err error) HttpResponse {
 	log.Print(err)
-	errMsg := "Database Error"
+	errMsg := "Internal Server Error!"
 	return HttpResponse{
 		StatusCode: http.StatusInternalServerError,
 		Status:     "failed",
@@ -27,7 +27,7 @@ func DBErrorResponse(err error) HttpResponse {
 
 func UserNotFoundResponse(err error) HttpResponse {
 	log.Print(err)
-	errMsg := "User Not Found"
+	errMsg := "User Not Found!"
 	return HttpResponse{
 		StatusCode: http.StatusNotFound,
 		Status:     "failed",
@@ -38,7 +38,7 @@ func UserNotFoundResponse(err error) HttpResponse {
 
 func JsonRequestErrorResponse(c *gin.Context, err error) {
 	log.Print(err)
-	errMsg := "Invalid Json Request"
+	errMsg := "Bad Json Request!"
 	c.JSON(http.StatusBadRequest, HttpResponse{
 		StatusCode: http.StatusBadRequest,
 		Status:     "failed",

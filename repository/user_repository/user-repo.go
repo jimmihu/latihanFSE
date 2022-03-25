@@ -36,8 +36,13 @@ func (repo *UserRepo) GetRoleList() ([]entity.Role, *gorm.DB) {
 	return RoleListResult, result
 }
 
-func (repo *UserRepo) GetUserDetail(Id uuid.UUID) (entity.User, *gorm.DB) {
-	UserDetailResult := entity.User{}
-	Result := repo.mysqlConn.Model(&entity.User{}).Joins("Role").First(&UserDetailResult, Id)
+func (repo *UserRepo) GetUserDetail(ID uuid.UUID) (entity.UserDetail, *gorm.DB) {
+	UserDetailResult := entity.UserDetail{}
+	Result := repo.mysqlConn.Model(&entity.User{}).Joins("Role").First(&UserDetailResult, ID)
 	return UserDetailResult, Result
+}
+
+func (repo *UserRepo) DeleteUser(ID uuid.UUID) *gorm.DB {
+	Result := repo.mysqlConn.Delete(&entity.User{}, ID)
+	return Result
 }

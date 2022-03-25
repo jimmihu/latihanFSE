@@ -80,3 +80,19 @@ func (u *UserUsecase) GetUserDetail(ID string) dto.HttpResponse {
 	}
 
 }
+
+func (u *UserUsecase) DeleteUser(ID string) dto.HttpResponse {
+	uuID, _ := uuid.Parse(ID)
+	result := u.UserRepo.DeleteUser(uuID)
+
+	if result.RowsAffected == 0 {
+		return dto.UserNotFoundResponse(result.Error)
+	}
+
+	return dto.HttpResponse{
+		StatusCode: http.StatusOK,
+		Status:     "ok",
+		Error:      nil,
+		Data:       nil,
+	}
+}

@@ -22,5 +22,6 @@ func InitRouter(mysqlConn *gorm.DB) *gin.Engine {
 	router.GET("/users", UserDelivery.GetUserList)
 	router.GET("/roles", UserDelivery.GetRoleList)
 	router.GET("/users/:id", UserDelivery.GetUserDetail)
+	router.DELETE("/users/:id", UserDelivery.DeleteUser)
 	return router
 }

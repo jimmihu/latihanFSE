@@ -11,7 +11,7 @@ type User struct {
 	ID             uuid.UUID      `gorm:"primaryKey;column:id;type:varchar(55)" json:"user_id"`
 	PersonalNumber string         `gorm:"column:personal_number;type:varchar(65)" json:"personal_number"`
 	Password       string         `gorm:"column:password;type:varchar(65)" json:"password"`
-	Email          string         `gorm:"column:emai;type:varchar(255)" json:"email"`
+	Email          string         `gorm:"column:email;type:varchar(255)" json:"email"`
 	Name           string         `gorm:"column:name;type:varchar(255)" json:"name"`
 	RoleID         uuid.UUID      `gorm:"column:role_id;type:varchar(55)" json:"-"`
 	Role           Role           `gorm:"foreignKey:RoleID" json:"role"`
@@ -32,4 +32,14 @@ type UserList struct {
 	RoleID uuid.UUID `json:"-"`
 	Role   Role      `json:"role" gorm:"foreignKey:RoleID"`
 	Active bool      `json:"active"`
+}
+
+type UserDetail struct {
+	ID             uuid.UUID `json:"id"`
+	Name           string    `json:"name"`
+	PersonalNumber string    `json:"personal_number"`
+	Email          string    `json:"email"`
+	RoleID         uuid.UUID `json:"-"`
+	Role           Role      `json:"role" gorm:"foreignKey:RoleID"`
+	Active         bool      `json:"active"`
 }

@@ -37,3 +37,9 @@ func (u *UserDelivery) GetUserDetail(c *gin.Context) {
 	response := u.UserUsecase.GetUserDetail(ID)
 	c.JSON(response.StatusCode, response)
 }
+
+func (u *UserDelivery) DeleteUser(c *gin.Context) {
+	ID := c.Param("id")
+	response := u.UserUsecase.DeleteUser(ID)
+	c.JSON(response.StatusCode, response)
+}
