@@ -9,6 +9,7 @@ import (
 type UserDeliveryInterface interface {
 	CreateUser(*gin.Context)
 	GetUserList(*gin.Context)
+	GetRoleList(*gin.Context)
 	GetUserDetail(*gin.Context)
 }
 

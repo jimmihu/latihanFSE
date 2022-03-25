@@ -48,6 +48,22 @@ func (u *UserUsecase) GetUserList() dto.HttpResponse {
 	}
 }
 
+func (u *UserUsecase) GetRoleList() dto.HttpResponse {
+
+	RoleList, result := u.UserRepo.GetRoleList()
+
+	if result.Error != nil {
+		return dto.DBErrorResponse(result.Error)
+	}
+
+	return dto.HttpResponse{
+		StatusCode: http.StatusOK,
+		Status:     "ok",
+		Error:      nil,
+		Data:       RoleList,
+	}
+}
+
 func (u *UserUsecase) GetUserDetail(ID string) dto.HttpResponse {
 	uuID, _ := uuid.Parse(ID)
 	UserDetail, result := u.UserRepo.GetUserDetail(uuID)

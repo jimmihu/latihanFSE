@@ -20,6 +20,7 @@ func InitRouter(mysqlConn *gorm.DB) *gin.Engine {
 	router.Use(cors.Default())
 	router.POST("/users", UserDelivery.CreateUser)
 	router.GET("/users", UserDelivery.GetUserList)
+	router.GET("/roles", UserDelivery.GetRoleList)
 	router.GET("/users/:id", UserDelivery.GetUserDetail)
 	return router
 }

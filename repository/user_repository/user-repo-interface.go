@@ -10,6 +10,7 @@ import (
 type UserRepoInterface interface {
 	CreateUser(user *entity.User) *gorm.DB
 	GetUserList() ([]entity.UserList, *gorm.DB)
+	GetRoleList() ([]entity.Role, *gorm.DB)
 	GetUserDetail(Id uuid.UUID) (entity.User, *gorm.DB)
 }
 

@@ -8,6 +8,7 @@ import (
 type UserUsecaseInterface interface {
 	CreateUser(dto.CreateUserRequest) dto.HttpResponse
 	GetUserList() dto.HttpResponse
+	GetRoleList() dto.HttpResponse
 	GetUserDetail(string) dto.HttpResponse
 }
 
