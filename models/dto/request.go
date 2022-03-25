@@ -33,3 +33,8 @@ type UpdateProductRequest struct {
 	Name        string `json:"name"`
 	Description string `json:"description" `
 }
+
+type LoginRequest struct {
+	PersonalNumber string `json:"personal_number" `
+	Password       string `json:"password" `
+}

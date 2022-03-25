@@ -47,3 +47,7 @@ type UserDetail struct {
 type UserIDResult struct {
 	ID uuid.UUID `json:"id"`
 }
+
+type LoginResult struct {
+	Token string `json:"token"`
+}
