@@ -30,3 +30,21 @@ func (repo *ProductRepo) DeleteProduct(ID uuid.UUID) *gorm.DB {
 	Result := repo.mysqlConn.Delete(&entity.Product{}, ID)
 	return Result
 }
+
+func (repo *ProductRepo) UpdateProduct(ID uuid.UUID, product *entity.Product) *gorm.DB {
+
+	Result := repo.mysqlConn.Model(entity.Product{ID: ID}).Updates(&product)
+	return Result
+}
+
+func (repo *ProductRepo) CheckProduct(ID uuid.UUID, product *entity.Product) *gorm.DB {
+	product.Status = "approved"
+	Result := repo.mysqlConn.Model(entity.Product{ID: ID}).Updates(&product)
+	return Result
+}
+
+func (repo *ProductRepo) PublishProduct(ID uuid.UUID, product *entity.Product) *gorm.DB {
+	product.Status = "active"
+	Result := repo.mysqlConn.Model(entity.Product{ID: ID}).Updates(&product)
+	return Result
+}

@@ -25,7 +25,7 @@ func (p *ProductUsecase) CreateProduct(request dto.CreateProductRequest) dto.Htt
 		StatusCode: http.StatusCreated,
 		Status:     "ok",
 		Error:      nil,
-		Data:       entity.ResultUserId{ID: product.ID},
+		Data:       entity.ProductIDResult{ID: product.ID},
 	}
 }
 
@@ -79,5 +79,77 @@ func (p *ProductUsecase) DeleteProduct(ID string) dto.HttpResponse {
 		Status:     "ok",
 		Error:      nil,
 		Data:       nil,
+	}
+}
+
+func (p *ProductUsecase) UpdateProduct(ID string, request dto.UpdateProductRequest) dto.HttpResponse {
+	uuID, _ := uuid.Parse(ID)
+	product := entity.Product{
+		Name:        request.Name,
+		Description: request.Description,
+	}
+	result := p.ProductRepo.UpdateProduct(uuID, &product)
+
+	if result.RowsAffected == 0 {
+		return dto.ProductNotFoundResponse(result.Error)
+	}
+
+	if result.Error != nil {
+		return dto.DBErrorResponse(result.Error)
+	}
+
+	return dto.HttpResponse{
+		StatusCode: http.StatusOK,
+		Status:     "ok",
+		Error:      nil,
+		Data:       entity.ProductIDResult{ID: uuID},
+	}
+}
+
+func (p *ProductUsecase) CheckProduct(ID string, request dto.UpdateProductRequest) dto.HttpResponse {
+	uuID, _ := uuid.Parse(ID)
+	product := entity.Product{
+		Name:        request.Name,
+		Description: request.Description,
+	}
+	result := p.ProductRepo.CheckProduct(uuID, &product)
+
+	if result.RowsAffected == 0 {
+		return dto.ProductNotFoundResponse(result.Error)
+	}
+
+	if result.Error != nil {
+		return dto.DBErrorResponse(result.Error)
+	}
+
+	return dto.HttpResponse{
+		StatusCode: http.StatusOK,
+		Status:     "ok",
+		Error:      nil,
+		Data:       entity.ProductIDResult{ID: uuID},
+	}
+}
+
+func (p *ProductUsecase) PublishProduct(ID string, request dto.UpdateProductRequest) dto.HttpResponse {
+	uuID, _ := uuid.Parse(ID)
+	product := entity.Product{
+		Name:        request.Name,
+		Description: request.Description,
+	}
+	result := p.ProductRepo.PublishProduct(uuID, &product)
+
+	if result.RowsAffected == 0 {
+		return dto.ProductNotFoundResponse(result.Error)
+	}
+
+	if result.Error != nil {
+		return dto.DBErrorResponse(result.Error)
+	}
+
+	return dto.HttpResponse{
+		StatusCode: http.StatusOK,
+		Status:     "ok",
+		Error:      nil,
+		Data:       entity.ProductIDResult{ID: uuID},
 	}
 }

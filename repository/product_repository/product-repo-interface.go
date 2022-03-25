@@ -12,6 +12,9 @@ type ProductRepoInterface interface {
 	GetProductList() ([]entity.ProductList, *gorm.DB)
 	GetProductDetail(ID uuid.UUID) (entity.ProductDetail, *gorm.DB)
 	DeleteProduct(ID uuid.UUID) *gorm.DB
+	UpdateProduct(ID uuid.UUID, product *entity.Product) *gorm.DB
+	CheckProduct(ID uuid.UUID, product *entity.Product) *gorm.DB
+	PublishProduct(ID uuid.UUID, product *entity.Product) *gorm.DB
 }
 
 type ProductRepo struct {

@@ -10,6 +10,9 @@ type ProductUsecaseInterface interface {
 	GetProductList() dto.HttpResponse
 	GetProductDetail(string) dto.HttpResponse
 	DeleteProduct(string) dto.HttpResponse
+	UpdateProduct(ID string, request dto.UpdateProductRequest) dto.HttpResponse
+	CheckProduct(ID string, request dto.UpdateProductRequest) dto.HttpResponse
+	PublishProduct(ID string, request dto.UpdateProductRequest) dto.HttpResponse
 }
 
 type ProductUsecase struct {

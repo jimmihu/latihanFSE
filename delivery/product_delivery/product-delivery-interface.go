@@ -11,6 +11,9 @@ type ProductDeliveryInterface interface {
 	GetProductList(c *gin.Context)
 	GetProductDetail(c *gin.Context)
 	DeleteProduct(c *gin.Context)
+	UpdateProduct(c *gin.Context)
+	CheckProduct(c *gin.Context)
+	PublishProduct(c *gin.Context)
 }
 
 type ProductDelivery struct {

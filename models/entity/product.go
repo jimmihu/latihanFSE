@@ -52,3 +52,7 @@ type UserResult struct {
 	ID   uuid.UUID `json:"id"`
 	Name string    `json:"name"`
 }
+
+type ProductIDResult struct {
+	ID uuid.UUID `json:"id"`
+}

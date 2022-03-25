@@ -28,7 +28,7 @@ func (u *UserUsecase) CreateUser(request dto.CreateUserRequest) dto.HttpResponse
 		StatusCode: http.StatusCreated,
 		Status:     "ok",
 		Error:      nil,
-		Data:       entity.ResultUserId{ID: user.ID},
+		Data:       entity.UserIDResult{ID: user.ID},
 	}
 }
 
@@ -125,6 +125,6 @@ func (u *UserUsecase) UpdateUser(ID string, request dto.UpdateUserRequest) dto.H
 		StatusCode: http.StatusOK,
 		Status:     "ok",
 		Error:      nil,
-		Data:       entity.ResultUserId{ID: uuID},
+		Data:       entity.UserIDResult{ID: uuID},
 	}
 }

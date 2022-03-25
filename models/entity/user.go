@@ -44,6 +44,6 @@ type UserDetail struct {
 	Active         bool      `json:"active"`
 }
 
-type ResultUserId struct {
+type UserIDResult struct {
 	ID uuid.UUID `json:"id"`
 }
