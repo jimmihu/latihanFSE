@@ -4,6 +4,16 @@
 import { request } from 'umi';
 /** 获取当前的用户 GET /api/currentUser */
 
+export async function LoginUser(body){
+  return request('localhost:8000/login',{
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    skipErrorHandler: true,
+  })
+}
 export async function currentUser(options) {
   return request('/api/currentUser', {
     method: 'GET',

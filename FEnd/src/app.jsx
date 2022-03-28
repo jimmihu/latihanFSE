@@ -49,7 +49,7 @@ export const layout = ({ initialState, setInitialState }) => {
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
     waterMarkProps: {
-      content: initialState?.currentUser?.name,
+      content: null,
     },
     footerRender: () => <Footer />,
     onPageChange: () => {
