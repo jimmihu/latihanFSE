@@ -8,6 +8,8 @@ const (
 	LOCAL       = "local"
 	DEVELOPMENT = "development"
 	PRODUCTION  = "production"
+
+	APP_NAME = "LatihanFSE"
 )
 
 // ENVIRONMENT:
@@ -24,6 +26,8 @@ var env = map[string]map[string]string{
 		"MYSQL_USER":   "root",
 		"MYSQL_PASS":   "",
 		"MYSQL_SCHEMA": "latihanfse",
+
+		"SECRET_KEY": "082170016395",
 	},
 
 	// development environment configuration
@@ -35,6 +39,8 @@ var env = map[string]map[string]string{
 		"MYSQL_USER":   "user",
 		"MYSQL_PASS":   "user",
 		"MYSQL_SCHEMA": "latihanfse",
+
+		"SECRET_KEY": "realsecretkey",
 	},
 }
 

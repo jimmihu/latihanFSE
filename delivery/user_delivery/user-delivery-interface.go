@@ -13,6 +13,7 @@ type UserDeliveryInterface interface {
 	GetUserDetail(*gin.Context)
 	DeleteUser(*gin.Context)
 	UpdateUser(c *gin.Context)
+	LoginUser(c *gin.Context)
 }
 
 type UserDelivery struct {

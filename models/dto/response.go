@@ -36,6 +36,16 @@ func UserNotFoundResponse(err error) HttpResponse {
 	}
 }
 
+func WrongUserPassResponse() HttpResponse {
+	errMsg := "Wrong Personal Number or Password!"
+	return HttpResponse{
+		StatusCode: http.StatusNotFound,
+		Status:     "failed",
+		Error:      &errMsg,
+		Data:       nil,
+	}
+}
+
 func ProductNotFoundResponse(err error) HttpResponse {
 	log.Print(err)
 	errMsg := "Product Not Found!"

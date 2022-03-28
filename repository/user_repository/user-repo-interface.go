@@ -14,6 +14,7 @@ type UserRepoInterface interface {
 	GetUserDetail(ID uuid.UUID) (entity.UserDetail, *gorm.DB)
 	DeleteUser(ID uuid.UUID) *gorm.DB
 	UpdateUser(ID uuid.UUID, user *entity.User) *gorm.DB
+	GetLoginUser(pn string) (entity.User, *gorm.DB)
 }
 
 type UserRepo struct {

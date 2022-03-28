@@ -3,6 +3,7 @@ package user_usecase
 import (
 	"latihanFSE/models/dto"
 	"latihanFSE/repository/user_repository"
+	"latihanFSE/usecase/jwt_usecase"
 )
 
 type UserUsecaseInterface interface {
@@ -12,14 +13,17 @@ type UserUsecaseInterface interface {
 	GetUserDetail(string) dto.HttpResponse
 	DeleteUser(string) dto.HttpResponse
 	UpdateUser(string, dto.UpdateUserRequest) dto.HttpResponse
+	LoginUser(request dto.LoginRequest) dto.HttpResponse
 }
 
 type UserUsecase struct {
-	UserRepo user_repository.UserRepoInterface
+	UserRepo   user_repository.UserRepoInterface
+	JwtUsecase jwt_usecase.JwtUsecaseInterface
 }
 
-func CreateUserUsecase(UserRepo user_repository.UserRepoInterface) UserUsecaseInterface {
+func CreateUserUsecase(UserRepo user_repository.UserRepoInterface, JwtUsecase jwt_usecase.JwtUsecaseInterface) UserUsecaseInterface {
 	return &UserUsecase{
-		UserRepo: UserRepo,
+		UserRepo:   UserRepo,
+		JwtUsecase: JwtUsecase,
 	}
 }

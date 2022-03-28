@@ -50,3 +50,9 @@ func (repo *UserRepo) UpdateUser(ID uuid.UUID, user *entity.User) *gorm.DB {
 	Result := repo.mysqlConn.Model(entity.User{ID: ID}).Updates(&user)
 	return Result
 }
+
+func (repo *UserRepo) GetLoginUser(pn string) (entity.User, *gorm.DB) {
+	UserResult := entity.User{}
+	Result := repo.mysqlConn.Model(&entity.User{}).Joins("Role").Where("personal_number = ?", pn).First(&UserResult)
+	return UserResult, Result
+}

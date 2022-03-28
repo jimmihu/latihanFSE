@@ -51,3 +51,8 @@ type UserIDResult struct {
 type LoginResult struct {
 	Token string `json:"token"`
 }
+
+type JwdPayload struct {
+	ID    uuid.UUID `json:"id"`
+	Email string    `json:"email"`
+}

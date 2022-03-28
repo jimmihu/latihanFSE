@@ -59,3 +59,18 @@ func (u *UserDelivery) UpdateUser(c *gin.Context) {
 	response := u.UserUsecase.UpdateUser(ID, UpdateUserRequest)
 	c.JSON(response.StatusCode, response)
 }
+
+func (u *UserDelivery) LoginUser(c *gin.Context) {
+	d := json.NewDecoder(c.Request.Body)
+	d.DisallowUnknownFields()
+
+	LoginRequest := dto.LoginRequest{}
+	err := d.Decode(&LoginRequest)
+	if err != nil {
+		dto.JsonRequestErrorResponse(c, err)
+		return
+	}
+
+	response := u.UserUsecase.LoginUser(LoginRequest)
+	c.JSON(response.StatusCode, response)
+}

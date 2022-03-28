@@ -5,6 +5,7 @@ import (
 
 	"latihanFSE/models/dto"
 	"latihanFSE/models/entity"
+	"latihanFSE/utils"
 
 	"github.com/google/uuid"
 )
@@ -126,5 +127,31 @@ func (u *UserUsecase) UpdateUser(ID string, request dto.UpdateUserRequest) dto.H
 		Status:     "ok",
 		Error:      nil,
 		Data:       entity.UserIDResult{ID: uuID},
+	}
+}
+
+func (u *UserUsecase) LoginUser(request dto.LoginRequest) dto.HttpResponse {
+	user, result := u.UserRepo.GetLoginUser(request.PersonalNumber)
+
+	if result.RowsAffected == 0 {
+		return dto.UserNotFoundResponse(result.Error)
+	}
+
+	errPass := utils.CheckPasswordHash(request.Password, user.Password)
+
+	if errPass != true {
+		return dto.WrongUserPassResponse()
+	}
+	token, _ := u.JwtUsecase.GenerateToken(user.ID, user.Email)
+
+	userToken := entity.LoginResult{
+		Token: token,
+	}
+
+	return dto.HttpResponse{
+		StatusCode: http.StatusOK,
+		Status:     "ok",
+		Error:      nil,
+		Data:       userToken,
 	}
 }

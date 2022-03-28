@@ -5,6 +5,7 @@ import (
 	"latihanFSE/delivery/user_delivery"
 	"latihanFSE/repository/product_repository"
 	"latihanFSE/repository/user_repository"
+	"latihanFSE/usecase/jwt_usecase"
 	"latihanFSE/usecase/product_usecase"
 	"latihanFSE/usecase/user_usecase"
 
@@ -16,7 +17,8 @@ import (
 func InitRouter(mysqlConn *gorm.DB) *gin.Engine {
 
 	UserRepo := user_repository.GetUserRepo(mysqlConn)
-	UserUsecase := user_usecase.CreateUserUsecase(UserRepo)
+	JwtUsecase := jwt_usecase.CreateJwtUseCase(UserRepo)
+	UserUsecase := user_usecase.CreateUserUsecase(UserRepo, JwtUsecase)
 	UserDelivery := user_delivery.CreateUserDelivery(UserUsecase)
 
 	ProductRepo := product_repository.GetProductRepo(mysqlConn)
@@ -41,6 +43,8 @@ func InitRouter(mysqlConn *gorm.DB) *gin.Engine {
 	router.PUT("/products/:id", ProductDelivery.UpdateProduct)
 	router.PUT("/products/:id/checked", ProductDelivery.CheckProduct)
 	router.PUT("/products/:id/published", ProductDelivery.PublishProduct)
+
+	router.POST("/login", UserDelivery.LoginUser)
 
 	return router
 }
