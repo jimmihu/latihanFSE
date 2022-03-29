@@ -1,7 +1,7 @@
 import React from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
 import { Card, Alert, Typography } from 'antd';
-import { useIntl, FormattedMessage } from 'umi';
+import { useIntl, FormattedMessage,useModel } from 'umi';
 import styles from './Welcome.less';
 
 const CodePreview = ({ children }) => (
@@ -11,13 +11,17 @@ const CodePreview = ({ children }) => (
     </code>
   </pre>
 );
-
 const Welcome = () => {
+  const { initialState, setInitialState } = useModel('@@initialState');
+  const { currentUser } = initialState;
   const intl = useIntl();
+  const msg = "Hello "+ currentUser.name +", Welcome to LatihanFSE!"
   return (
     <PageContainer>
       <Card>
-        {/* <Alert
+        {
+        <FormattedMessage id="pages.welcome.msg" defaultMessage={msg} />
+        /* <Alert
           message={intl.formatMessage({
             id: 'pages.welcome.alertMessage',
             defaultMessage: 'Faster and stronger heavy-duty components have been released.',

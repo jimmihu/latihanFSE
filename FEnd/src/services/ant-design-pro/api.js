@@ -29,8 +29,16 @@ export async function CreateUser(payload){
 }
 
 export async function GetUserDetail(id) {
-  return request(`http://localhost:8000/users/${id}`, {
+  return request(BaseURL+'/users/${id}', {
     method: 'GET',
+    skipErrorHandler: true,
+  });
+}
+
+export async function GetUserList() {
+  return request(BaseURL+'/users', {
+    method: 'GET',
+    skipErrorHandler: true,
   });
 }
 // export async function currentUser(options) {
