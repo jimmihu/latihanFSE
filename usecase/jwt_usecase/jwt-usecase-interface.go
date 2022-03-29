@@ -7,7 +7,7 @@ import (
 )
 
 type JwtUsecaseInterface interface {
-	GenerateToken(UserID uuid.UUID, Email string) (string, error)
+	GenerateToken(UserID uuid.UUID, Name string) (string, error)
 }
 
 type JwtUsecase struct {

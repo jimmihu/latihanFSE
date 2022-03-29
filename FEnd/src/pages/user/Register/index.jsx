@@ -13,9 +13,10 @@ import React, { useState } from 'react';
 import { ProFormCaptcha, ProFormCheckbox, ProFormText, LoginForm } from '@ant-design/pro-form';
 import { useIntl, history, FormattedMessage, SelectLang, useModel } from 'umi';
 import Footer from '@/components/Footer';
-import { login, LoginUser } from '@/services/ant-design-pro/api';
+import { login, LoginUser,CreateUser } from '@/services/ant-design-pro/api';
 import { getFakeCaptcha } from '@/services/ant-design-pro/login';
 import styles from './index.less';
+import { PathRegisterContext } from 'rc-menu/lib/context/PathContext';
 
 const LoginMessage = ({ content }) => (
   <Alert
@@ -28,56 +29,35 @@ const LoginMessage = ({ content }) => (
   />
 );
 
-const Login = () => {
-  const [userLoginState, setUserLoginState] = useState({});
-  const [type, setType] = useState('login');
-  const { initialState, setInitialState } = useModel('@@initialState');
+const Register = () => {
+  const [type, setType] = useState('register');
   const intl = useIntl();
 
-  const fetchUserInfo = async () => {
-    const userInfo = await initialState?.fetchUserInfo?.();
-
-    if (userInfo) {
-      await setInitialState((s) => ({ ...s, currentUser: userInfo }));
-    }
-  };
-
   const handleSubmit = async (values) => {
-      const { personal_number, password } = values;
+      const { personal_number, name, email, password } = values;
       try {
         // 登录
-        const msg = await LoginUser({ personal_number, password });
+        const msg = await CreateUser({ personal_number, name, email, password });
 
         if (msg.status === 'ok') {
-          localStorage.setItem('token', msg.data.token);
           const defaultLoginSuccessMessage = intl.formatMessage({
             id: 'pages.login.success',
-            defaultMessage: '登录成功！',
+            defaultMessage: 'Registered Successfully！',
           });
           message.success(defaultLoginSuccessMessage);
-          await fetchUserInfo();
+          history.push('/user/login');
+          
           /** 此方法会跳转到 redirect 参数所在的位置 */
-
-          if (!history) return;
-          const { query } = history.location;
-          const { redirect } = query;
-          history.push(redirect || '/');
-          return;
         }
-
-        console.log(msg); // 如果失败去设置用户错误信息
-
-        setUserLoginState(msg);
       } catch (error) {
         const defaultLoginFailureMessage = intl.formatMessage({
           id: 'pages.login.failure',
-          defaultMessage: '登录失败，请重试！',
+          defaultMessage: 'Register Failed！',
         });
         message.error(defaultLoginFailureMessage);
       }
   };
 
-  const { status, type: loginType } = userLoginState;
   return (
     <div className={styles.container}>
       <div className={styles.lang} data-lang>
@@ -87,12 +67,31 @@ const Login = () => {
         <LoginForm
           logo={<img alt="logo" src="/logo.svg" />}
           title="Ant Design/LatihanFSE"
+          submitter={{
+            render: (props, doms) => {
+              console.log(props);
+              return (
+                <div style={{ width: '100%' }}>
+                  <button
+                    type="button "
+                    key="submit "
+                    style={{
+                      width: '100%',
+                      backgroundColor: '#1890ff',
+                      border: 'none',
+                      padding: 8,
+                      color: 'white',
+                    }}
+                  >
+                    Register
+                  </button>
+                </div>
+              );
+            },
+          }}
           subTitle={intl.formatMessage({
             id: 'pages.layouts.userLayout.title',
           })}
-          initialValues={{
-            autoLogin: true,
-          }}
           // actions={[
           //   <FormattedMessage
           //     key="loginWith"
@@ -109,8 +108,8 @@ const Login = () => {
         >
           <Tabs activeKey={type} onChange={setType}>
             <Tabs.TabPane
-              key="login"
-              tab="Login"
+              key="register"
+              tab="Register"
             />
           </Tabs>
 
@@ -229,18 +228,19 @@ const Login = () => {
           <div
             style={{
               marginBottom: 24,
+              paddingBottom: 24
             }}
           >
-            <ProFormCheckbox noStyle name="autoLogin">
-              <FormattedMessage id="pages.login.rememberMe" defaultMessage="自动登录" />
-            </ProFormCheckbox>
             <a
               style={{
                 float: 'right',
               }}
-              onClick={() => history.push('/user/register')}
+              onClick={() => history.push('/user/login')}
             >
-              <FormattedMessage id="pages.login.register" defaultMessage="Sign up now!" />
+              <FormattedMessage
+                id="pages.login.login"
+                defaultMessage="Already Registered? Login now!"
+              />
             </a>
           </div>
         </LoginForm>
@@ -250,4 +250,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

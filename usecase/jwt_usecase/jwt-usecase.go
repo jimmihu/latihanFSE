@@ -11,14 +11,14 @@ import (
 type CustomClaim struct {
 	jwt.StandardClaims
 	UserID uuid.UUID `json:"user_id"`
-	Email  string    `json:"email"`
+	Name   string    `json:"name"`
 }
 
-func (jwtAuth *JwtUsecase) GenerateToken(UserID uuid.UUID, Email string) (string, error) {
+func (jwtAuth *JwtUsecase) GenerateToken(UserID uuid.UUID, Name string) (string, error) {
 
 	claim := CustomClaim{
 		UserID: UserID,
-		Email:  Email,
+		Name:   Name,
 		StandardClaims: jwt.StandardClaims{
 			IssuedAt:  time.Now().Unix(),
 			ExpiresAt: time.Now().Add(time.Minute * 60).Unix(),

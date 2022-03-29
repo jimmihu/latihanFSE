@@ -142,7 +142,7 @@ func (u *UserUsecase) LoginUser(request dto.LoginRequest) dto.HttpResponse {
 	if errPass != true {
 		return dto.WrongUserPassResponse()
 	}
-	token, _ := u.JwtUsecase.GenerateToken(user.ID, user.Email)
+	token, _ := u.JwtUsecase.GenerateToken(user.ID, user.Name)
 
 	userToken := entity.LoginResult{
 		Token: token,

@@ -53,6 +53,6 @@ type LoginResult struct {
 }
 
 type JwdPayload struct {
-	ID    uuid.UUID `json:"id"`
-	Email string    `json:"email"`
+	ID   uuid.UUID `json:"id"`
+	Name string    `json:"name"`
 }

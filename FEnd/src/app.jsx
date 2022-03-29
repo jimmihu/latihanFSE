@@ -6,9 +6,11 @@ import Footer from '@/components/Footer';
 import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
 import { BookOutlined, LinkOutlined } from '@ant-design/icons';
 import defaultSettings from '../config/defaultSettings';
+import users from './services/users';
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
 /** 获取用户信息比较慢的时候会展示一个 loading */
+
 
 export const initialStateConfig = {
   loading: <PageLoading />,
@@ -19,27 +21,12 @@ export const initialStateConfig = {
 
 export async function getInitialState() {
   const fetchUserInfo = async () => {
-    try {
-      const msg = await queryCurrentUser();
-      return msg.data;
-    } catch (error) {
-      history.push(loginPath);
-    }
-
-    return undefined;
+    return users();
   }; // 如果不是登录页面，执行
-
-  if (history.location.pathname !== loginPath) {
     const currentUser = await fetchUserInfo();
-    return {
-      fetchUserInfo,
-      currentUser,
-      settings: defaultSettings,
-    };
-  }
-
   return {
     fetchUserInfo,
+    currentUser,
     settings: defaultSettings,
   };
 } // ProLayout 支持的api https://procomponents.ant.design/components/layout

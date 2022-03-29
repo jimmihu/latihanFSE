@@ -4,22 +4,41 @@
 import { request } from 'umi';
 /** 获取当前的用户 GET /api/currentUser */
 
-export async function LoginUser(body){
-  return request('localhost:8000/login',{
+const BaseURL = 'http://localhost:8000';
+
+export async function LoginUser(payload){
+  return request(BaseURL +'/login',{
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    data: body,
+    body: JSON.stringify(payload),
     skipErrorHandler: true,
   })
 }
-export async function currentUser(options) {
-  return request('/api/currentUser', {
+
+export async function CreateUser(payload){
+  return request(BaseURL +'/users',{
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+    skipErrorHandler: true,
+  })
+}
+
+export async function GetUserDetail(id) {
+  return request(`http://localhost:8000/users/${id}`, {
     method: 'GET',
-    ...(options || {}),
   });
 }
+// export async function currentUser(options) {
+//   return request('/api/currentUser', {
+//     method: 'GET',
+//     ...(options || {}),
+//   });
+// }
 /** 退出登录接口 POST /api/login/outLogin */
 
 export async function outLogin(options) {
