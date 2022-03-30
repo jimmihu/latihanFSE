@@ -52,7 +52,7 @@ type LoginResult struct {
 	Token string `json:"token"`
 }
 
-type JwdPayload struct {
-	ID   uuid.UUID `json:"id"`
-	Name string    `json:"name"`
+type JwtPayload struct {
+	UserID uuid.UUID `json:"user_id"`
+	Name   string    `json:"name"`
 }

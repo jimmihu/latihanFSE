@@ -3,6 +3,7 @@ package app
 import (
 	"latihanFSE/delivery/product_delivery"
 	"latihanFSE/delivery/user_delivery"
+	"latihanFSE/middleware"
 	"latihanFSE/repository/product_repository"
 	"latihanFSE/repository/user_repository"
 	"latihanFSE/usecase/jwt_usecase"
@@ -26,25 +27,46 @@ func InitRouter(mysqlConn *gorm.DB) *gin.Engine {
 	ProductDelivery := product_delivery.CreateProductDelivery(ProductUsecase)
 
 	router := gin.Default()
-	router.Use(cors.Default())
+	router.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"*"},
+		AllowMethods:     []string{"*"},
+		AllowHeaders:     []string{"*"},
+		ExposeHeaders:    []string{"*"},
+		AllowCredentials: true,
+	}))
 
 	router.POST("/users", UserDelivery.CreateUser)
-	router.GET("/users", UserDelivery.GetUserList)
-	router.GET("/users/:id", UserDelivery.GetUserDetail)
-	router.PUT("/users/:id", UserDelivery.UpdateUser)
-	router.DELETE("/users/:id", UserDelivery.DeleteUser)
+	router.POST("/login", UserDelivery.LoginUser)
 
+	routeGroupAdmin := router.Group("/")
+	routeGroupAdmin.Use(middleware.JwtAuthRoles([]string{"admin"}, JwtUsecase))
+	{
+		routeGroupAdmin.GET("/users", UserDelivery.GetUserList)
+		routeGroupAdmin.GET("/users/:id", UserDelivery.GetUserDetail)
+		routeGroupAdmin.PUT("/users/:id", UserDelivery.UpdateUser)
+		routeGroupAdmin.DELETE("/users/:id", UserDelivery.DeleteUser)
+	}
 	router.GET("/roles", UserDelivery.GetRoleList)
 
-	router.POST("/products", ProductDelivery.CreateProduct)
-	router.GET("/products", ProductDelivery.GetProductList)
-	router.GET("/products/:id", ProductDelivery.GetProductDetail)
-	router.DELETE("/products/:id", ProductDelivery.DeleteProduct)
-	router.PUT("/products/:id", ProductDelivery.UpdateProduct)
-	router.PUT("/products/:id/checked", ProductDelivery.CheckProduct)
-	router.PUT("/products/:id/published", ProductDelivery.PublishProduct)
-
-	router.POST("/login", UserDelivery.LoginUser)
+	routeGroupAuth := router.Group("/")
+	routeGroupAuth.Use(middleware.JwtAuth(JwtUsecase))
+	{
+		routeGroupAuth.POST("/products", ProductDelivery.CreateProduct)
+		routeGroupAuth.GET("/products", ProductDelivery.GetProductList)
+		routeGroupAuth.GET("/products/:id", ProductDelivery.GetProductDetail)
+		routeGroupAuth.DELETE("/products/:id", ProductDelivery.DeleteProduct)
+		routeGroupAuth.PUT("/products/:id", ProductDelivery.UpdateProduct)
+	}
+	routeGroupChecker := router.Group("/")
+	routeGroupChecker.Use(middleware.JwtAuthRoles([]string{"admin", "checker"}, JwtUsecase))
+	{
+		routeGroupChecker.PUT("/products/:id/checked", ProductDelivery.CheckProduct)
+	}
+	routeGroupSigner := router.Group("/")
+	routeGroupSigner.Use(middleware.JwtAuthRoles([]string{"admin", "signer"}, JwtUsecase))
+	{
+		routeGroupSigner.PUT("/products/:id/published", ProductDelivery.PublishProduct)
+	}
 
 	return router
 }
