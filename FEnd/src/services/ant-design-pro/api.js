@@ -28,16 +28,21 @@ export async function CreateUser(payload){
   })
 }
 
-export async function GetUserDetail(id) {
+export async function GetUserDetail(id,options) {
   return request(BaseURL+'/users/'+id, {
     method: 'GET',
+    headers: { 'Content-Type': 'application/json',
+    Authorization: 'Bearer '+localStorage.getItem('token')},
     skipErrorHandler: true,
+    ...(options || {}),
   });
 }
 
 export async function DeleteUser(id) {
   return request(BaseURL+'/users/'+id, {
     method: 'DELETE',
+    headers: { 'Content-Type': 'application/json',
+    Authorization: 'Bearer '+localStorage.getItem('token')},
     skipErrorHandler: true,
   });
 }
@@ -45,6 +50,8 @@ export async function DeleteUser(id) {
 export async function GetUserList() {
   return request(BaseURL+'/users', {
     method: 'GET',
+    headers: { 'Content-Type': 'application/json',
+    Authorization: 'Bearer '+localStorage.getItem('token')},
     skipErrorHandler: true,
   });
 }
@@ -52,9 +59,8 @@ export async function GetUserList() {
 export async function CreateProduct(payload){
   return request(BaseURL +'/products',{
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers: { 'Content-Type': 'application/json',
+    Authorization: 'Bearer '+localStorage.getItem('token')},
     body: JSON.stringify(payload),
     skipErrorHandler: true,
   })
@@ -63,6 +69,8 @@ export async function CreateProduct(payload){
 export async function GetProductList() {
   return request(BaseURL+'/products', {
     method: 'GET',
+    headers: { 'Content-Type': 'application/json',
+    Authorization: 'Bearer '+localStorage.getItem('token')},
     skipErrorHandler: true,
   });
 }
@@ -70,6 +78,8 @@ export async function GetProductList() {
 export async function GetProductDetail(id) {
   return request(BaseURL+'/products/'+id, {
     method: 'GET',
+    headers: { 'Content-Type': 'application/json',
+    Authorization: 'Bearer '+localStorage.getItem('token')},
     skipErrorHandler: true,
   });
 }
@@ -77,6 +87,8 @@ export async function GetProductDetail(id) {
 export async function DeleteProduct(id) {
   return request(BaseURL+'/products/'+id, {
     method: 'DELETE',
+    headers: { 'Content-Type': 'application/json',
+    Authorization: 'Bearer '+localStorage.getItem('token')},
     skipErrorHandler: true,
   });
 }
