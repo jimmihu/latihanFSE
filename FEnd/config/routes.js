@@ -16,6 +16,7 @@ export default [
             path: '/user/register',
             component: './user/Register',
           },
+          
         ],
       },
       {
@@ -48,11 +49,23 @@ export default [
     ],
   },
   {
-    name: 'list.table-list',
-    icon: 'table',
-    path: '/list',
-    component: './TableList',
+    name: 'User List',
+    icon: 'team',
+    path: '/users',
+    component: './user/user_list',
   },
+  {
+    name: 'Product List',
+    icon: 'table',
+    path: '/products',
+    component: './product/product_list',
+  },
+  // {
+  //   name: 'list.table-list',
+  //   icon: 'table',
+  //   path: '/list',
+  //   component: './TableList',
+  // },
   {
     path: '/',
     redirect: '/welcome',
