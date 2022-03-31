@@ -21,7 +21,7 @@ var env = map[string]map[string]string{
 
 		"PORT": "8000",
 
-		"MYSQL_HOST":   "127.0.0.1",
+		"MYSQL_HOST":   "host.docker.internal", // "localhost" w/out docker
 		"MYSQL_PORT":   "3306",
 		"MYSQL_USER":   "root",
 		"MYSQL_PASS":   "",
@@ -34,7 +34,7 @@ var env = map[string]map[string]string{
 	"development": {
 		"PORT": "8000",
 
-		"MYSQL_HOST":   "localhost",
+		"MYSQL_HOST":   "127.0.0.1",
 		"MYSQL_PORT":   "3306",
 		"MYSQL_USER":   "root",
 		"MYSQL_PASS":   "",
