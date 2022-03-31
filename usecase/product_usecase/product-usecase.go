@@ -13,6 +13,7 @@ func (p *ProductUsecase) CreateProduct(request dto.CreateProductRequest) dto.Htt
 	product := entity.Product{
 		Name:        request.Name,
 		Description: request.Description,
+		MakerID:     request.MakerID,
 	}
 
 	result := p.ProductRepo.CreateProduct(&product)
@@ -106,11 +107,13 @@ func (p *ProductUsecase) UpdateProduct(ID string, request dto.UpdateProductReque
 	}
 }
 
-func (p *ProductUsecase) CheckProduct(ID string, request dto.UpdateProductRequest) dto.HttpResponse {
+func (p *ProductUsecase) CheckProduct(ID string, request dto.CheckProductRequest) dto.HttpResponse {
 	uuID, _ := uuid.Parse(ID)
 	product := entity.Product{
 		Name:        request.Name,
 		Description: request.Description,
+		CheckerID:   request.CheckerID,
+		Status:      "approved",
 	}
 	result := p.ProductRepo.CheckProduct(uuID, &product)
 
@@ -130,11 +133,13 @@ func (p *ProductUsecase) CheckProduct(ID string, request dto.UpdateProductReques
 	}
 }
 
-func (p *ProductUsecase) PublishProduct(ID string, request dto.UpdateProductRequest) dto.HttpResponse {
+func (p *ProductUsecase) PublishProduct(ID string, request dto.PublishProductRequest) dto.HttpResponse {
 	uuID, _ := uuid.Parse(ID)
 	product := entity.Product{
 		Name:        request.Name,
 		Description: request.Description,
+		SignerID:    request.SignerID,
+		Status:      "active",
 	}
 	result := p.ProductRepo.PublishProduct(uuID, &product)
 

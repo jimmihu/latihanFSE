@@ -114,11 +114,11 @@ const ProductList = () => {
       valueType: 'textarea',
     },
     {
-      title: 'Active',
-      dataIndex: 'active',
+      title: 'Status',
+      dataIndex: 'status',
       valueType: 'text',
       render: (_, rowData) => {
-        return <>{rowData.active ? 'Active' : 'Inactive'}</>;
+        return <>{rowData.status}</>;
       },
     },
     {
@@ -169,9 +169,9 @@ const ProductList = () => {
     {title: 'ID',dataIndex: 'id',valueType: 'text',},
     {title: 'Name',dataIndex: 'name',valueType: 'text',},
     {title: 'Description',dataIndex: 'description',valueType: 'textarea',},
-    {title: 'Active',dataIndex: 'active',valueType: 'text',
+    {title: 'Status',dataIndex: 'status',valueType: 'text',
       render: (_, rowData) => {
-        return <>{rowData.active ? 'Active' : 'Inactive'}</>;
+        return <>{rowData.status}</>;
       },
     },
     {title: 'Maker',dataIndex: 'Maker',valueType: 'text',

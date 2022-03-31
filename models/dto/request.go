@@ -1,6 +1,8 @@
 package dto
 
 import (
+	"latihanFSE/models/entity"
+
 	"github.com/google/uuid"
 )
 
@@ -25,8 +27,10 @@ type RoleID struct {
 }
 
 type CreateProductRequest struct {
-	Name        string `json:"name"`
-	Description string `json:"description" `
+	Name        string            `json:"name"`
+	Description string            `json:"description" `
+	MakerID     uuid.UUID         `json:"-"`
+	Maker       entity.UserResult `gorm:"foreignKey:MakerID"`
 }
 
 type UpdateProductRequest struct {
@@ -34,6 +38,21 @@ type UpdateProductRequest struct {
 	Description string `json:"description" `
 }
 
+type CheckProductRequest struct {
+	Name        string            `json:"name"`
+	Description string            `json:"description" `
+	CheckerID   uuid.UUID         `json:"-"`
+	Checker     entity.UserResult `gorm:"foreignKey:CheckerID"`
+	Status      string            `json:"status"`
+}
+
+type PublishProductRequest struct {
+	Name        string            `json:"name"`
+	Description string            `json:"description" `
+	SignerID    uuid.UUID         `json:"-"`
+	Signer      entity.UserResult `gorm:"foreignKey:SignerID"`
+	Status      string            `json:"status"`
+}
 type LoginRequest struct {
 	PersonalNumber string `json:"personal_number" `
 	Password       string `json:"password" `

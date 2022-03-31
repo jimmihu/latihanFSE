@@ -10,7 +10,7 @@ import (
 func (repo *ProductRepo) CreateProduct(product *entity.Product) *gorm.DB {
 
 	product.Status = "inactive"
-	result := repo.mysqlConn.Omit("MakerID", "CheckerID", "SignerID").Create(&product)
+	result := repo.mysqlConn.Omit("CheckerID", "SignerID").Create(&product)
 	return result
 }
 
@@ -38,13 +38,11 @@ func (repo *ProductRepo) UpdateProduct(ID uuid.UUID, product *entity.Product) *g
 }
 
 func (repo *ProductRepo) CheckProduct(ID uuid.UUID, product *entity.Product) *gorm.DB {
-	product.Status = "approved"
 	Result := repo.mysqlConn.Model(entity.Product{ID: ID}).Updates(&product)
 	return Result
 }
 
 func (repo *ProductRepo) PublishProduct(ID uuid.UUID, product *entity.Product) *gorm.DB {
-	product.Status = "active"
 	Result := repo.mysqlConn.Model(entity.Product{ID: ID}).Updates(&product)
 	return Result
 }

@@ -5,13 +5,18 @@ import (
 	"latihanFSE/models/dto"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 )
 
 func (p *ProductDelivery) CreateProduct(c *gin.Context) {
 	d := json.NewDecoder(c.Request.Body)
 	d.DisallowUnknownFields()
+	UserID, _ := c.Get("user_id")
+	UserMakerID, _ := UserID.(uuid.UUID)
 
-	CreateProductRequest := dto.CreateProductRequest{}
+	CreateProductRequest := dto.CreateProductRequest{
+		MakerID: UserMakerID,
+	}
 	err := d.Decode(&CreateProductRequest)
 	if err != nil {
 		dto.JsonRequestErrorResponse(c, err)
@@ -59,15 +64,19 @@ func (p *ProductDelivery) CheckProduct(c *gin.Context) {
 	ID := c.Param("id")
 	d := json.NewDecoder(c.Request.Body)
 	d.DisallowUnknownFields()
+	UserID, _ := c.Get("user_id")
+	CheckerID, _ := UserID.(uuid.UUID)
 
-	UpdateProductRequest := dto.UpdateProductRequest{}
-	err := d.Decode(&UpdateProductRequest)
+	CheckProductRequest := dto.CheckProductRequest{
+		CheckerID: CheckerID,
+	}
+	err := d.Decode(&CheckProductRequest)
 	if err != nil {
 		dto.JsonRequestErrorResponse(c, err)
 		return
 	}
 
-	response := p.ProductUsecase.CheckProduct(ID, UpdateProductRequest)
+	response := p.ProductUsecase.CheckProduct(ID, CheckProductRequest)
 	c.JSON(response.StatusCode, response)
 }
 
@@ -75,14 +84,18 @@ func (p *ProductDelivery) PublishProduct(c *gin.Context) {
 	ID := c.Param("id")
 	d := json.NewDecoder(c.Request.Body)
 	d.DisallowUnknownFields()
+	UserID, _ := c.Get("user_id")
+	SignerID, _ := UserID.(uuid.UUID)
 
-	UpdateProductRequest := dto.UpdateProductRequest{}
-	err := d.Decode(&UpdateProductRequest)
+	PublishProductRequest := dto.PublishProductRequest{
+		SignerID: SignerID,
+	}
+	err := d.Decode(&PublishProductRequest)
 	if err != nil {
 		dto.JsonRequestErrorResponse(c, err)
 		return
 	}
 
-	response := p.ProductUsecase.PublishProduct(ID, UpdateProductRequest)
+	response := p.ProductUsecase.PublishProduct(ID, PublishProductRequest)
 	c.JSON(response.StatusCode, response)
 }
