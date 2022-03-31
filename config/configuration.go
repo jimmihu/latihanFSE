@@ -32,15 +32,15 @@ var env = map[string]map[string]string{
 
 	// development environment configuration
 	"development": {
-		"PORT": "80",
+		"PORT": "8000",
 
 		"MYSQL_HOST":   "localhost",
 		"MYSQL_PORT":   "3306",
-		"MYSQL_USER":   "user",
-		"MYSQL_PASS":   "user",
+		"MYSQL_USER":   "root",
+		"MYSQL_PASS":   "",
 		"MYSQL_SCHEMA": "latihanfse",
 
-		"SECRET_KEY": "realsecretkey",
+		"SECRET_KEY": "082170016395",
 	},
 }
 
