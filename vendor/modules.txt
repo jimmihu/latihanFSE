@@ -1,3 +1,21 @@
+# github.com/apache/calcite-avatica-go/v5 v5.1.0
+## explicit; go 1.17
+github.com/apache/calcite-avatica-go/v5
+github.com/apache/calcite-avatica-go/v5/errors
+github.com/apache/calcite-avatica-go/v5/generic
+github.com/apache/calcite-avatica-go/v5/hsqldb
+github.com/apache/calcite-avatica-go/v5/internal
+github.com/apache/calcite-avatica-go/v5/message
+github.com/apache/calcite-avatica-go/v5/phoenix
+# github.com/cpuguy83/go-md2man/v2 v2.0.0-20190314233015-f79a8a8ca69d
+## explicit; go 1.12
+github.com/cpuguy83/go-md2man/v2/md2man
+# github.com/creack/pty v1.1.11
+## explicit; go 1.13
+github.com/creack/pty
+# github.com/fatih/color v1.9.0
+## explicit; go 1.13
+github.com/fatih/color
 # github.com/gin-contrib/cors v1.3.1
 ## explicit; go 1.13
 github.com/gin-contrib/cors
@@ -33,6 +51,63 @@ github.com/golang/protobuf/proto
 # github.com/google/uuid v1.3.0
 ## explicit
 github.com/google/uuid
+# github.com/hashicorp/go-uuid v1.0.2
+## explicit
+github.com/hashicorp/go-uuid
+# github.com/jcmturner/aescts/v2 v2.0.0
+## explicit; go 1.13
+github.com/jcmturner/aescts/v2
+# github.com/jcmturner/dnsutils/v2 v2.0.0
+## explicit; go 1.13
+github.com/jcmturner/dnsutils/v2
+# github.com/jcmturner/gofork v1.0.0
+## explicit
+github.com/jcmturner/gofork/encoding/asn1
+github.com/jcmturner/gofork/x/crypto/pbkdf2
+# github.com/jcmturner/goidentity/v6 v6.0.1
+## explicit; go 1.13
+github.com/jcmturner/goidentity/v6
+# github.com/jcmturner/gokrb5/v8 v8.4.2
+## explicit; go 1.14
+github.com/jcmturner/gokrb5/v8/asn1tools
+github.com/jcmturner/gokrb5/v8/client
+github.com/jcmturner/gokrb5/v8/config
+github.com/jcmturner/gokrb5/v8/credentials
+github.com/jcmturner/gokrb5/v8/crypto
+github.com/jcmturner/gokrb5/v8/crypto/common
+github.com/jcmturner/gokrb5/v8/crypto/etype
+github.com/jcmturner/gokrb5/v8/crypto/rfc3961
+github.com/jcmturner/gokrb5/v8/crypto/rfc3962
+github.com/jcmturner/gokrb5/v8/crypto/rfc4757
+github.com/jcmturner/gokrb5/v8/crypto/rfc8009
+github.com/jcmturner/gokrb5/v8/gssapi
+github.com/jcmturner/gokrb5/v8/iana
+github.com/jcmturner/gokrb5/v8/iana/addrtype
+github.com/jcmturner/gokrb5/v8/iana/adtype
+github.com/jcmturner/gokrb5/v8/iana/asnAppTag
+github.com/jcmturner/gokrb5/v8/iana/chksumtype
+github.com/jcmturner/gokrb5/v8/iana/errorcode
+github.com/jcmturner/gokrb5/v8/iana/etypeID
+github.com/jcmturner/gokrb5/v8/iana/flags
+github.com/jcmturner/gokrb5/v8/iana/keyusage
+github.com/jcmturner/gokrb5/v8/iana/msgtype
+github.com/jcmturner/gokrb5/v8/iana/nametype
+github.com/jcmturner/gokrb5/v8/iana/patype
+github.com/jcmturner/gokrb5/v8/kadmin
+github.com/jcmturner/gokrb5/v8/keytab
+github.com/jcmturner/gokrb5/v8/krberror
+github.com/jcmturner/gokrb5/v8/messages
+github.com/jcmturner/gokrb5/v8/pac
+github.com/jcmturner/gokrb5/v8/service
+github.com/jcmturner/gokrb5/v8/spnego
+github.com/jcmturner/gokrb5/v8/types
+# github.com/jcmturner/rpc/v2 v2.0.3
+## explicit; go 1.13
+github.com/jcmturner/rpc/v2/mstypes
+github.com/jcmturner/rpc/v2/ndr
+# github.com/jinzhu/gorm v1.9.16
+## explicit; go 1.12
+github.com/jinzhu/gorm
 # github.com/jinzhu/inflection v1.0.0
 ## explicit
 github.com/jinzhu/inflection
@@ -45,6 +120,9 @@ github.com/json-iterator/go
 # github.com/leodido/go-urn v1.2.1
 ## explicit; go 1.13
 github.com/leodido/go-urn
+# github.com/mattn/go-colorable v0.1.4
+## explicit
+github.com/mattn/go-colorable
 # github.com/mattn/go-isatty v0.0.14
 ## explicit; go 1.12
 github.com/mattn/go-isatty
@@ -54,15 +132,44 @@ github.com/modern-go/concurrent
 # github.com/modern-go/reflect2 v1.0.2
 ## explicit; go 1.12
 github.com/modern-go/reflect2
+# github.com/pkg/errors v0.9.1
+## explicit
+github.com/pkg/errors
+# github.com/russross/blackfriday/v2 v2.0.1
+## explicit
+github.com/russross/blackfriday/v2
+# github.com/shurcooL/sanitized_anchor_name v1.0.0
+## explicit
+github.com/shurcooL/sanitized_anchor_name
 # github.com/ugorji/go/codec v1.2.7
 ## explicit; go 1.11
 github.com/ugorji/go/codec
-# golang.org/x/crypto v0.0.0-20220321153916-2c7772ba3064
+# github.com/unchartedsoftware/witch v0.0.0-20200617171400-4f405404126f
+## explicit; go 1.12
+github.com/unchartedsoftware/witch
+github.com/unchartedsoftware/witch/cursor
+github.com/unchartedsoftware/witch/glob
+github.com/unchartedsoftware/witch/graceful
+github.com/unchartedsoftware/witch/spinner
+github.com/unchartedsoftware/witch/watcher
+github.com/unchartedsoftware/witch/writer
+# github.com/urfave/cli v1.22.4
+## explicit; go 1.11
+github.com/urfave/cli
+# github.com/xinsnake/go-http-digest-auth-client v0.6.0
+## explicit
+github.com/xinsnake/go-http-digest-auth-client
+# golang.org/x/crypto v0.0.0-20220331220935-ae2d96664a29
 ## explicit; go 1.17
 golang.org/x/crypto/bcrypt
 golang.org/x/crypto/blowfish
+golang.org/x/crypto/md4
+golang.org/x/crypto/pbkdf2
 golang.org/x/crypto/sha3
-# golang.org/x/sys v0.0.0-20220319134239-a9b59b0215f8
+# golang.org/x/net v0.0.0-20211112202133-69e39bad7dc2
+## explicit; go 1.17
+golang.org/x/net/http2/hpack
+# golang.org/x/sys v0.0.0-20220330033206-e17cdc41300f
 ## explicit; go 1.17
 golang.org/x/sys/cpu
 golang.org/x/sys/internal/unsafeheader

@@ -21,6 +21,8 @@ var env = map[string]map[string]string{
 
 		"PORT": "8000",
 
+		"PQS_URL": "http://127.0.0.1:16010",
+
 		"MYSQL_HOST":   "host.docker.internal", // "localhost" w/out docker
 		"MYSQL_PORT":   "3306",
 		"MYSQL_USER":   "root",
