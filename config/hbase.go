@@ -1,36 +1,35 @@
 package config
 
 import (
-	"errors"
+	"database/sql"
 	"log"
-	"strings"
 
 	_ "github.com/apache/calcite-avatica-go/v5"
-	_ "github.com/go-sql-driver/mysql"
-	"github.com/jinzhu/gorm"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 )
 
-func ConnectHbase() ([]*gorm.DB, error) {
+func ConnectHbase() (*gorm.DB, *sql.DB, error) {
 
-	listUrl := strings.Split(CONFIG["PQS_URL"], ",")
-
-	var listConn []*gorm.DB
-	for _, url := range listUrl {
-		hbaseConn, err := gorm.Open("avatica", url)
-		if err != nil {
-			log.Println("DB connection error: ", err.Error())
-			continue
-		}
-		hbaseConn.DB().SetMaxIdleConns(2)
-		hbaseConn.DB().SetMaxOpenConns(1000)
-		hbaseConn.LogMode(true)
-		log.Println("Hbase connnection success: ", url)
-		listConn = append(listConn, hbaseConn)
+	connectionString := CONFIG["PQS_URL"]
+	avatica, err := sql.Open("avatica", connectionString)
+	hbaseConn, err := gorm.Open(mysql.New(mysql.Config{Conn: avatica}), &gorm.Config{})
+	if err != nil {
+		log.Println("DB connection error: ", err.Error())
+	}
+	hbaseDB, errDB := hbaseConn.DB()
+	if errDB != nil {
+		log.Println(errDB)
+	} else {
+		hbaseDB.SetMaxIdleConns(2)
+		hbaseDB.SetMaxOpenConns(1000)
 	}
 
-	if len(listConn) == 0 {
-		return nil, errors.New("no hbase connection available")
+	migrate := hbaseConn.Raw("CREATE TABLE IF NOT EXISTS ?", "users")
+	if migrate.Error != nil {
+		log.Println("HBase migration error: ", migrate.Error.Error())
 	}
 
-	return listConn, nil
+	log.Println("Hbase connnection success: ", CONFIG["PQS_URL"])
+	return hbaseConn, hbaseDB, nil
 }

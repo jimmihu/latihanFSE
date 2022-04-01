@@ -20,8 +20,14 @@ func main() {
 	}
 	defer sqlDB.Close()
 
+	hbaseConn, hbaseDB, errHBase := config.ConnectHbase()
+	if errHBase != nil {
+		log.Println("error HBase connection: ", errHBase)
+	}
+	defer hbaseDB.Close()
+
 	if errMysql == nil {
-		router := app.InitRouter(mysqlConn)
+		router := app.InitRouter(mysqlConn, hbaseConn)
 		log.Println("routes Initialized")
 
 		port := config.CONFIG["PORT"]

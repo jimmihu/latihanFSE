@@ -15,9 +15,9 @@ import (
 	"gorm.io/gorm"
 )
 
-func InitRouter(mysqlConn *gorm.DB) *gin.Engine {
+func InitRouter(mysqlConn *gorm.DB, hbaseConn *gorm.DB) *gin.Engine {
 
-	UserRepo := user_repository.GetUserRepo(mysqlConn)
+	UserRepo := user_repository.GetUserRepo(mysqlConn, hbaseConn)
 	JwtUsecase := jwt_usecase.CreateJwtUseCase(UserRepo)
 	UserUsecase := user_usecase.CreateUserUsecase(UserRepo, JwtUsecase)
 	UserDelivery := user_delivery.CreateUserDelivery(UserUsecase)

@@ -18,11 +18,13 @@ type UserRepoInterface interface {
 }
 
 type UserRepo struct {
+	hbaseConn *gorm.DB
 	mysqlConn *gorm.DB
 }
 
-func GetUserRepo(mysqlConn *gorm.DB) UserRepoInterface {
+func GetUserRepo(mysqlConn *gorm.DB, hbaseConn *gorm.DB) UserRepoInterface {
 	return &UserRepo{
+		hbaseConn: hbaseConn,
 		mysqlConn: mysqlConn,
 	}
 }
