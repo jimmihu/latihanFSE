@@ -17,23 +17,23 @@ pipeline {
             }
         }
         
-        // stage('Build') {
-        //     steps {
-        //         echo 'Compiling and building'
-        //         sh 'go build'
-        //     }
-        // }
+        stage('Build') {
+            steps {
+                // echo 'Compiling and building'
+                // sh 'go build'
+            }
+        }
 
-        // stage('Test') {
-        //     steps {
-        //         withEnv(["PATH+GO=${GOPATH}/bin"]){
-        //             echo 'Running vetting'
-        //             sh 'go vet .'
-        //             echo 'Running test'
-        //             sh 'cd test && go test -v'
-        //         }
-        //     }
-        // }
+        stage('Test') {
+            steps {
+                // withEnv(["PATH+GO=${GOPATH}/bin"]){
+                //     echo 'Running vetting'
+                //     sh 'go vet .'
+                //     echo 'Running test'
+                //     sh 'cd test && go test -v'
+                //}
+            }
+        }
         
     }
     post {
