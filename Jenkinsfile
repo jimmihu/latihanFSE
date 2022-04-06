@@ -29,13 +29,11 @@ pipeline {
                      echo 'Running testing 1'
                      sh 'cd delivery'
                      sh 'cd user_delivery && go test'
-                }
-            steps {
+                     sh 'cd .. && cd ..'
                      echo 'Running testing 2'
                      sh 'cd usecase'
                      sh 'cd user_usecase && go test'
-                }
-            steps {
+                     sh 'cd .. && cd ..'
                      echo 'Running testing 3'
                      sh 'cd repository'
                      sh 'cd user_repository && go test'
