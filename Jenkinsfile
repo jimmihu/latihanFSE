@@ -20,6 +20,7 @@ pipeline {
         stage('Build') {
             steps {
                  echo 'Compiling and building'
+                 sh 'go mod vendor'
                  sh 'go build -mod=readonly'
             }
         }
