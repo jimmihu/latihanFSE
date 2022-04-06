@@ -27,16 +27,14 @@ pipeline {
         stage('Test') {
             steps {
                      echo 'Running testing 1'
-                     sh 'cd delivery'
-                     sh 'cd user_delivery && go test'
-                     sh 'cd .. && cd ..'
+                     sh 'cd delivery/user_delivery && go test'
+                     sh 'cd ../..'
                      echo 'Running testing 2'
-                     sh 'cd usecase'
-                     sh 'cd user_usecase && go test'
-                     sh 'cd .. && cd ..'
+                     sh 'cd usecase/user_usecase && go test'
+                     sh 'cd ../..'
                      echo 'Running testing 3'
-                     sh 'cd repository'
-                     sh 'cd user_repository && go test'
+                     sh 'cd repository/user_repository && go test'
+                     sh 'cd ../..'
                 }
             
         }
