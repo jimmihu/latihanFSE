@@ -19,19 +19,27 @@ pipeline {
         
         stage('Build') {
             steps {
-                // echo 'Compiling and building'
-                // sh 'go build'
+                 echo 'Compiling and building'
+                 sh 'go build'
             }
         }
 
         stage('Test') {
             steps {
-                // withEnv(["PATH+GO=${GOPATH}/bin"]){
-                //     echo 'Running vetting'
-                //     sh 'go vet .'
-                //     echo 'Running test'
-                //     sh 'cd test && go test -v'
-                //}
+                     echo 'Running testing 1'
+                     sh 'cd delivery'
+                     sh 'cd user_delivery && go test'
+                }
+            steps {
+                     echo 'Running testing 2'
+                     sh 'cd usecase'
+                     sh 'cd user_usecase && go test'
+                }
+            steps {
+                     echo 'Running testing 3'
+                     sh 'cd repository'
+                     sh 'cd user_repository && go test'
+                }
             }
         }
         
