@@ -34,8 +34,9 @@ pipeline {
                      sh 'cd usecase/user_usecase && go test'
                      sh 'cd ../..'
                      echo 'Running testing 3'
-                     sh 'cd repository/user_repository && go test'
-                     sh 'cd ../..'
+                    //  sh 'cd repository/user_repository && go test'
+                    //  sh 'cd ../..'
+                    // cant test local repo on jenkins
                 }
             
         }
