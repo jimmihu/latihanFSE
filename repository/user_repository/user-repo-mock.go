@@ -19,19 +19,9 @@ func (repoMock *UserRepositoryMock) Ping() string {
 func (repoMock *UserRepositoryMock) CreateUser(request *entity.User) *gorm.DB {
 	args := repoMock.Called(request)
 	if args.Get(0) == nil {
-		return &gorm.DB{
-			Config:       &gorm.Config{},
-			Error:        args.Get(0).(error),
-			RowsAffected: 0,
-			Statement:    &gorm.Statement{},
-		}
+		return nil
 	}
-	return &gorm.DB{
-		Config:       &gorm.Config{},
-		Error:        nil,
-		RowsAffected: 0,
-		Statement:    &gorm.Statement{},
-	}
+	return args.Get(0).(*gorm.DB)
 }
 
 func (repoMock *UserRepositoryMock) DeleteUser(ID uuid.UUID) *gorm.DB {
