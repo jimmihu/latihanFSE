@@ -1,4 +1,6 @@
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
+github.com/DATA-DOG/go-sqlmock v1.5.0 h1:Shsta01QNfFxHCfpW6YH2STWB0MudeXXEWMr20OEh60=
+github.com/DATA-DOG/go-sqlmock v1.5.0/go.mod h1:f/Ixk793poVmq4qj/V1dPUg2JEAKC73Q5eFN3EC/SaM=
 github.com/apache/calcite-avatica-go/v5 v5.1.0 h1:+2mv9w1l2FaCWT6HbmaKBJWdJpLkqkWsZHdbWLplk3Y=
 github.com/apache/calcite-avatica-go/v5 v5.1.0/go.mod h1:/yHT1MqQW4p9R9Mg6lGwW9x++e1jXP9LJBB4/dZAbN4=
 github.com/cpuguy83/go-md2man/v2 v2.0.0-20190314233015-f79a8a8ca69d h1:U+s90UTSYgptZMwQh2aRr3LuazLJIa+Pg3Kc1ylSYVY=

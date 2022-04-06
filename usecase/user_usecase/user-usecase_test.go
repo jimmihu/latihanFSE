@@ -9,6 +9,8 @@ import (
 	"net/http"
 	"testing"
 
+	"github.com/gin-gonic/gin"
+
 	"github.com/stretchr/testify/assert"
 
 	"gorm.io/gorm"
@@ -19,6 +21,11 @@ var JwtUsecase = jwt_usecase.CreateJwtUseCase(repoMock)
 var usecase = CreateUserUsecase(repoMock, JwtUsecase)
 
 var reqUser = entity.User{}
+
+func TestMain(m *testing.M) {
+	gin.SetMode(gin.TestMode)
+	m.Run()
+}
 
 func TestGivenNil_WhenCreateUser_ShouldProduceBadRequestError(t *testing.T) {
 	var retun gorm.DB
@@ -35,5 +42,6 @@ func TestGivenNil_WhenCreateUser_ShouldProduceBadRequestError(t *testing.T) {
 			Data:       nil,
 		}
 	}
+	//incomplete cant get *gorm must change CreateUser return #lazy
 	assert.EqualValues(t, http.StatusInternalServerError, respons.StatusCode)
 }

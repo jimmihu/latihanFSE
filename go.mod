@@ -14,7 +14,10 @@ require (
 	gorm.io/gorm v1.23.3
 )
 
-require github.com/stretchr/testify v1.7.1
+require (
+	github.com/DATA-DOG/go-sqlmock v1.5.0
+	github.com/stretchr/testify v1.7.1
+)
 
 require (
 	github.com/cpuguy83/go-md2man/v2 v2.0.0-20190314233015-f79a8a8ca69d // indirect
