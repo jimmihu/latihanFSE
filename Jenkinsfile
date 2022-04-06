@@ -40,7 +40,7 @@ pipeline {
                      sh 'cd repository'
                      sh 'cd user_repository && go test'
                 }
-            }
+            
         }
         
     }
